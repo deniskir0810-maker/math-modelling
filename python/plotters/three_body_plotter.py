@@ -43,4 +43,4 @@ class ThreeBodyPlotter(AbstractPlotter):
     ax.set_title('Trajectories of bodies moving under a gravity force')
     ax.legend()
     plt.savefig(self.output_path, dpi=150)
-    plt.close() 
+    plt.close()
