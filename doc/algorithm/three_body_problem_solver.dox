@@ -38,9 +38,9 @@ m_k \frac{d^2 \bar{x}_k}{dt^2} = \bar{F}_k(\bar{x}_1,\bar{x}_2,\bar{x}_3),
 ```json
 {
   "value_type": "double",
-  "tau": 0.001,
-  "finish_time": 10.0,
-  "export_period": 0.1,
+  "tau": 10.0,
+  "finish_time": 10000.0,
+  "export_period": 100.0,
   "masses": [2e30, 6e24, 7.3e22],
   "G": 6.6740e-11,
   "initial_positions": [[0.0, 0.0, 0.0], [1.5e11, 0.0, 0.0], [1.5e11, 3.83e8, 3.44e7]],
@@ -60,3 +60,8 @@ m_k \frac{d^2 \bar{x}_k}{dt^2} = \bar{F}_k(\bar{x}_1,\bar{x}_2,\bar{x}_3),
   ]
 }
 \endcode
+
+\section visualization Визуализация
+
+Скрипт `python/plot.py ThreeBodyPlotter data.json output.png` рисует траектории тел.
+*/
