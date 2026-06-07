@@ -15,11 +15,11 @@ namespace mm {
 template<typename T>
 
 class R3Vec {
-  private:
+ private:
   // @param Координаты вектора
   T x, y, z;
 
-  public:
+ public:
   // Конструкторы
   R3Vec() {
     x = 0;
