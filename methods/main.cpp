@@ -112,10 +112,10 @@ int main(int argc, char* argv[]) {
     nlohmann::json input = nlohmann::json::parse(req.body);
 
     class ThreeBodyMethodWrapper : public mm::AbstractSolverWrapper {
-      private:
+     private:
       nlohmann::json input;
       nlohmann::json output;
-      public:
+     public:
       explicit ThreeBodyMethodWrapper(const nlohmann::json& in) : input(in) {}
       bool Solve(nlohmann::json* out) override {
         int ret = mm::ThreeBodyProblemMethod(input, &output);
