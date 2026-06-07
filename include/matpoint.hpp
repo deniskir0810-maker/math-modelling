@@ -22,7 +22,7 @@ const double G = 6.6740e-11;
 template<typename T>
 
 class mat_point {
-  public:
+ public:
   //! Масса
   T mass;
   //! Текущая координата точки
@@ -69,7 +69,7 @@ class mat_point {
 
   mat_point operator+ (const mat_point& other) const {
     return mat_point(mass, point + other.point, velocity + other.velocity,
-		acceleration + other.acceleration);
+      acceleration + other.acceleration);
   }
 
   mat_point operator* (const T a) const {
@@ -81,7 +81,7 @@ class mat_point {
   mat_point(const mat_point<U>& other) : mass(static_cast<T>(other.mass)),
     point(other.point),
     velocity(other.velocity),
-	acceleration(other.acceleration) {
+    acceleration(other.acceleration) {
   }
 };
 }  // namespace mm
