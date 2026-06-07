@@ -229,7 +229,7 @@ static void PlotTest(httplib::Client* cli) {
     fout << result["data"].dump(); // сохраняем только массив data
   }
 
-  std::filesystem::path pythonDir("../python");
+  std::filesystem::path pythonDir("python");
   std::string plotterPath = (pythonDir / "plot.py").string();
   std::string outputImagePath = (dataDir / "three_body_trajectory.png").string();
 
