@@ -32,7 +32,7 @@ void ThreeBodyProblemSolver<T>::ComputeDerivatives
   }
   for (int i = 0; i < 3; i++)
     for (int j = i + 1; j < 3; j++) {
-      R3Vec<T> force = state[i].NewtonForce(state[j]);  // сила, действующая на i
+      R3Vec<T> force = state[i].NewtonForce(state[j]);
       dstate[i].velocity += force * (1.0 / state[i].mass);
       dstate[j].velocity += force * (-1.0 / state[j].mass);
     }
@@ -82,7 +82,8 @@ bool ThreeBodyProblemSolver<T>::MakeStep() {
     new_state[i] = state[i];
     new_state[i].point = state[i].point + (k1[i].point +
     k2[i].point * 2.0 + k3[i].point * 2.0 + k4[i].point) * (this->tau / 6.0);
-    new_state[i].velocity = state[i].velocity + (k1[i].velocity + k2[i].velocity * 2.0
+    new_state[i].velocity = state[i].velocity +
+    (k1[i].velocity + k2[i].velocity * 2.0
     + k3[i].velocity * 2.0 + k4[i].velocity) * (this->tau / 6.0);
   }
 
