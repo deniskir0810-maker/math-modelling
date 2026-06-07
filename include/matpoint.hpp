@@ -19,7 +19,7 @@ public:
   R3Vec<T> acceleration;
 
   T weight() const {
-	  return mass;
+    return mass;
   }
   
   mat_point() : point(), velocity(), mass(0), acceleration() {};
@@ -61,9 +61,9 @@ public:
   
   template<typename U>
   mat_point(const mat_point<U>& other) : mass(static_cast<T>(other.mass)),
-	  point(other.point),
-	  velocity(other.velocity),
-	  acceleration(other.acceleration) {
+    point(other.point),
+	velocity(other.velocity),
+	acceleration(other.acceleration) {
   }
 };
 }
