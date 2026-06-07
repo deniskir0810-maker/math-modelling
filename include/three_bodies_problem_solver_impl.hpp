@@ -32,9 +32,9 @@ namespace mm {
       }
       for (int i = 0; i < 3; i++) {
         for (int j = i + 1; j < 3; j++) {
-          R3Vec<T> force = state[i].NewtonForce(state[j]); // сила, действующая на i
-            dstate[i].velocity += force * (1.0 / state[i].mass);
-            dstate[j].velocity += force * (-1.0 / state[j].mass);
+          R3Vec<T> force = state[i].NewtonForce(state[j]); // СЃРёР»Р°, РґРµР№СЃС‚РІСѓСЋС‰Р°СЏ РЅР° i
+          dstate[i].velocity += force * (1.0 / state[i].mass);
+          dstate[j].velocity += force * (-1.0 / state[j].mass);
         }
       }
   }
