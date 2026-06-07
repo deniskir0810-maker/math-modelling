@@ -13,12 +13,13 @@
 namespace mm {
 // Тип данных, используемых для арифметики (double/float)
 template<typename T>
-    
+
 class R3Vec {
-private:
-  //@param Координаты вектора
+  private:
+  // @param Координаты вектора
   T x, y, z;
-public:
+
+  public:
   // Конструкторы
   R3Vec() {
     x = 0;
@@ -78,7 +79,8 @@ public:
   }
   // Векторное произведение
   R3Vec operator^ (const R3Vec& other) const {
-    return R3Vec(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x);
+    return R3Vec(y * other.z - z * other.y,
+    z * other.x - x * other.z, x * other.y - y * other.x);
   }
   R3Vec operator* (const T a) const {
     return R3Vec(x * a, y * a, z * a);
@@ -88,27 +90,30 @@ public:
     return x * other.x + y * other.y + z * other.z;
   }
   bool operator== (const R3Vec& other) const {
-    return bool(!((abs(x - other.x) > 1e-10) || (abs(y - other.y) > 1e-10) || (abs(z - other.z) > 1e-10)));
+    return static_cast<bool>(!((abs(x - other.x) > 1e-10) ||
+    (abs(y - other.y) > 1e-10) || (abs(z - other.z) > 1e-10)));
   }
   bool operator!= (const R3Vec& other) const {
-    return bool(!(other == *this));
+    return static_cast<bool>(!(other == *this));
   }
   bool operator> (const R3Vec& other) const {
-     return bool(x - other.x > 1e-10) && (y - other.y > 1e-10) && (z - other.z > 1e-10);
+    return static_cast<bool>(x - other.x > 1e-10) &&
+    (y - other.y > 1e-10) && (z - other.z > 1e-10);
   }
   bool operator<= (const R3Vec& other) const {
-    return bool(!(*this > other));
+    return static_cast<bool>(!(*this > other));
   }
   bool operator< (const R3Vec& other) const {
-    return bool(x - other.x < 1e-10) && (y - other.y < 1e-10) && (z - other.z < 1e-10);
+    return static_cast<bool>(x - other.x < 1e-10) &&
+    (y - other.y < 1e-10) && (z - other.z < 1e-10);
   }
   bool operator>= (const R3Vec& other) const {
-    return bool(!(*this < other));
+    return static_cast<bool>(!(*this < other));
   }
   R3Vec normalize() const {
     return *this * (1.0 / length());
   }
 };
-}
+}  // namespace mm
 
-#endif //! INCLUDE_VEC3D_HPP_
+#endif  // INCLUDE_VEC3D_HPP_
