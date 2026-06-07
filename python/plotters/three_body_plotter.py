@@ -31,11 +31,11 @@ class ThreeBodyPlotter(AbstractPlotter):
     for i in range(3):
         trace = np.array(trajectories[i])
         ax.plot(trace[:, 0], trace[:, 1], trace[:, 2],
-            color=colors[i], linewidth=1.5, label=labels[i])
+                    color=colors[i], linewidth=1.5, label=labels[i])
         ax.scatter(trace[0, 0], trace[0, 1], trace[0, 2],
-            color=colors[i], marker='o', s=50)
+                    color=colors[i], marker='o', s=50)
         ax.scatter(trace[-1, 0], trace[-1, 1], trace[-1, 2],
-            color=colors[i], marker='s', s=50)
+                    color=colors[i], marker='s', s=50)
 
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
