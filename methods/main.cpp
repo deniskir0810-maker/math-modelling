@@ -105,11 +105,7 @@ int main(int argc, char* argv[]) {
     res.set_content(output.dump(), "application/json");
   });
 
-
-
-
   /* Сюда нужно вставить обработчик post запроса для алгоритма. */
-
 
   svr.Post("/ThreeBodyProblem", [&](const httplib::Request& req, httplib::Response& res) {
     nlohmann::json input = nlohmann::json::parse(req.body);
@@ -134,7 +130,7 @@ int main(int argc, char* argv[]) {
     nlohmann::json response;
     response["id"] = taskId;
     res.set_content(response.dump(), "application/json");
-  });
+  };
   /* Конец вставки. */
 
   // Эта функция запускает сервер на указанном порту. Программа не завершится
