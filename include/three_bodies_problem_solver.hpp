@@ -47,7 +47,7 @@ public:
    * @param body0 Первое тело.
    * @param body1 Второе тело.
    * @param body2 Третье тело.
-   * @param tau Øàã Шаг по времени.
+   * @param tau Шаг по времени.
    * @param finishTime Конечное время.
    * @param exportPeriod Период экспорта.
    */
