@@ -19,7 +19,7 @@ namespace mm {
    */
 template<typename T>
 class ThreeBodyProblemSolver : public AbstractSolver<T> {
-  private:
+ private:
   mat_point<T> bodies[3];  //!< Три материальные точки
 
   /**
@@ -42,7 +42,7 @@ class ThreeBodyProblemSolver : public AbstractSolver<T> {
   void ComputeDerivatives(const mat_point<T>(&state)[3],
     mat_point<T>(&dstate)[3]) const;
 
-  public:
+ public:
   /**
    * @brief Конструктор.
    * @param body0 Первое тело.
