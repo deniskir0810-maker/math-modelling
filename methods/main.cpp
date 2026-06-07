@@ -131,7 +131,7 @@ int main(int argc, char* argv[]) {
     nlohmann::json response;
     response["id"] = taskId;
     res.set_content(response.dump(), "application/json");
-  };
+  });
   /* Конец вставки. */
 
   // Эта функция запускает сервер на указанном порту. Программа не завершится
