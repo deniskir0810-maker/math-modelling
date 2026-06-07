@@ -2,11 +2,11 @@
 * @file include/three_bodies_problem_solver.hpp
 * @author Denis Kirilenko
 * 
-* Решалка для задачи трех тел
+* Р РµС€Р°Р»РєР° Р·Р°РґР°С‡Рё С‚СЂРµС… С‚РµР»
 */
 
-#ifndef INCLUDE_THREE_BODY_PROBLEM_SOLVER_HPP_
-#define INCLUDE_THREE_BODY_PROBLEM_SOLVER_HPP_
+#ifndef INCLUDE_THREE_BODIES_PROBLEM_SOLVER_HPP_
+#define INCLUDE_THREE_BODIES_PROBLEM_SOLVER_HPP_
 
 #include "abstract_solver.hpp"
 #include "matpoint.hpp"
@@ -14,52 +14,54 @@
 namespace mm {
 
   /**
-   * @brief Решалка задачи трёх тел методом Рунге-Кутты 4-го порядка.
-   * @tparam T Тип данных (float/double).
+   * @brief Р РµС€Р°Р»РєР° Р·Р°РґР°С‡Рё С‚СЂС‘С… С‚РµР» РјРµС‚РѕРґРѕРј Р СѓРЅРіРµ-РљСѓС‚С‚С‹ 4-РіРѕ РїРѕСЂСЏРґРєР°.
+   * @tparam T РўРёРї РґР°РЅРЅС‹С… (float/double).
    */
 template<typename T>
 class ThreeBodyProblemSolver : public AbstractSolver<T> {
-private:
-  mat_point<T> bodies[3];  //!< Три материальные точки
+ private:
+  mat_point<T> bodies[3];  //!< РўСЂРё РјР°С‚РµСЂРёР°Р»СЊРЅС‹Рµ С‚РѕС‡РєРё
 
   /**
-   * @brief Копирует текущее состояние в массив.
-   * @param dest Массив из трёх точек для заполнения.
+   * @brief РљРѕРїРёСЂСѓРµС‚ С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РІ РјР°СЃСЃРёРІ.
+   * @param dest РњР°СЃСЃРёРІ РёР· С‚СЂС‘С… С‚РѕС‡РµРє РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ.
    */
-   void GetState(mat_point<T>(&dest)[3]) const;
+  void GetState(mat_point<T>(&dest)[3]) const;
 
     /**
-     * @brief Устанавливает состояние из массива.
-     * @param src Массив с новым состоянием.
+     * @brief РЈСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ СЃРѕСЃС‚РѕСЏРЅРёРµ РёР· РјР°СЃСЃРёРІР°.
+     * @param src РњР°СЃСЃРёРІ СЃ РЅРѕРІС‹Рј СЃРѕСЃС‚РѕСЏРЅРёРµРј.
      */
-    void SetState(const mat_point<T>(&src)[3]);
+  void SetState(const mat_point<T>(&src)[3]);
 
     /**
-     * @brief Вычисляет производные (dx/dt = v, dv/dt = a) для заданного состояния.
-     * @param state Текущее состояние (положения, скорости, массы).
-     * @param[out] dstate Производные: dstate[i].point = скорость, dstate[i].velocity = ускорение.
+     * @brief Р’С‹С‡РёСЃР»СЏРµС‚ РїСЂРѕРёР·РІРѕРґРЅС‹Рµ (dx/dt = v, dv/dt = a) РґР»СЏ Р·Р°РґР°РЅРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ.
+     * @param state РўРµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ (РїРѕР»РѕР¶РµРЅРёСЏ, СЃРєРѕСЂРѕСЃС‚Рё, РјР°СЃСЃС‹).
+     * @param[out] dstate РџСЂРѕРёР·РІРѕРґРЅС‹Рµ: dstate[i].point = СЃРєРѕСЂРѕСЃС‚СЊ, dstate[i].velocity = СѓСЃРєРѕСЂРµРЅРёРµ.
      */
-     void ComputeDerivatives(const mat_point<T>(&state)[3], mat_point<T>(&dstate)[3]) const;
+  void ComputeDerivatives(const mat_point<T>(&state)[3],
+    mat_point<T>(&dstate)[3]) const;
 
-public:
-     /**
-      * @brief Конструктор.
-      * @param body0 Первое тело.
-      * @param body1 Второе тело.
-      * @param body2 Третье тело.
-      * @param tau Шаг по времени.
-      * @param finishTime Конечное время.
-      * @param exportPeriod Период экспорта.
-      */
-     ThreeBodyProblemSolver(const mat_point<T>& body0, const mat_point<T>& body1, const mat_point<T>& body2,
-       T tau, T finishTime, T exportPeriod);
+ public:
+  /**
+   * @brief РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ.
+   * @param body0 РџРµСЂРІРѕРµ С‚РµР»Рѕ.
+   * @param body1 Р’С‚РѕСЂРѕРµ С‚РµР»Рѕ.
+   * @param body2 РўСЂРµС‚СЊРµ С‚РµР»Рѕ.
+   * @param tau РЁР°Рі РїРѕ РІСЂРµРјРµРЅРё.
+   * @param finishTime РљРѕРЅРµС‡РЅРѕРµ РІСЂРµРјСЏ.
+   * @param exportPeriod РџРµСЂРёРѕРґ СЌРєСЃРїРѕСЂС‚Р°.
+   */
+  ThreeBodyProblemSolver(const mat_point<T>& body0,
+    const mat_point<T>& body1, const mat_point<T>& body2,
+    T tau, T finishTime, T exportPeriod);
 
-     bool MakeStep() override;
-     void ExportData(nlohmann::json* output) override;
-    };
+    bool MakeStep() override;
+    void ExportData(nlohmann::json* output) override;
+};
 
-} // namespace mm
+}  // namespace mm
 
 #include "three_bodies_problem_solver_impl.hpp"
 
-#endif // INCLUDE_THREE_BODY_PROBLEM_SOLVER_HPP_
+#endif  // INCLUDE_THREE_BODIES_PROBLEM_SOLVER_HPP_
