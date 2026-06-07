@@ -9,9 +9,9 @@
 #include <cstdio>
 #include <filesystem>
 #include <fstream>
+#include <httplib.h>
 #include <string>
 #include <thread>
-#include <httplib.h>
 #include <nlohmann/json.hpp>
 #include "test.hpp"
 #include "test_core.hpp"
@@ -62,7 +62,7 @@ static void SimpleDoubleTest(httplib::Client* cli) {
     }}
   };
 
-    // Отправка задачи
+  // Отправка задачи
   auto res = cli->Post("/ThreeBodyProblem", input.dump(), "application/json");
   REQUIRE(res);
   REQUIRE(res->status == 200);
@@ -86,7 +86,7 @@ static void SimpleDoubleTest(httplib::Client* cli) {
   REQUIRE(result["data"].size() > 0);
 }
 
-//Статический тест 2: круговое движение трёх тел
+// Статический тест 2: круговое движение трёх тел
 
 static void CircularOrbitTest(httplib::Client* cli) {
   json input = {
