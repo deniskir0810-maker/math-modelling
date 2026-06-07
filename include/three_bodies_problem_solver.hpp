@@ -5,8 +5,8 @@
 * Решалка задачи трех тел
 */
 
-#ifndef INCLUDE_THREE_BODY_PROBLEM_SOLVER_HPP_
-#define INCLUDE_THREE_BODY_PROBLEM_SOLVER_HPP_
+#ifndef INCLUDE_THREE_BODIES_PROBLEM_SOLVER_HPP_
+#define INCLUDE_THREE_BODIES_PROBLEM_SOLVER_HPP_
 
 #include "abstract_solver.hpp"
 #include "matpoint.hpp"
@@ -19,7 +19,7 @@ namespace mm {
    */
 template<typename T>
 class ThreeBodyProblemSolver : public AbstractSolver<T> {
-private:
+  private:
   mat_point<T> bodies[3];  //!< Три материальные точки
 
   /**
@@ -39,9 +39,10 @@ private:
      * @param state Текущее состояние (положения, скорости, массы).
      * @param[out] dstate Производные: dstate[i].point = скорость, dstate[i].velocity = ускорение.
      */
-  void ComputeDerivatives(const mat_point<T>(&state)[3], mat_point<T>(&dstate)[3]) const;
+  void ComputeDerivatives(const mat_point<T>(&state)[3],
+    mat_point<T>(&dstate)[3]) const;
 
-public:
+  public:
   /**
    * @brief Конструктор.
    * @param body0 Первое тело.
@@ -51,15 +52,16 @@ public:
    * @param finishTime Конечное время.
    * @param exportPeriod Период экспорта.
    */
-  ThreeBodyProblemSolver(const mat_point<T>& body0, const mat_point<T>& body1, const mat_point<T>& body2,
+  ThreeBodyProblemSolver(const mat_point<T>& body0,
+    const mat_point<T>& body1, const mat_point<T>& body2,
     T tau, T finishTime, T exportPeriod);
 
     bool MakeStep() override;
     void ExportData(nlohmann::json* output) override;
-  };
+};
 
-} // namespace mm
+}  // namespace mm
 
 #include "three_bodies_problem_solver_impl.hpp"
 
-#endif // INCLUDE_THREE_BODY_PROBLEM_SOLVER_HPP_
+#endif  // INCLUDE_THREE_BODIES_PROBLEM_SOLVER_HPP_
