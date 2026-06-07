@@ -5,19 +5,22 @@
  * Тесты для задачи трех тел
  */
 
-#include "test.hpp"
-#include "test_core.hpp"
-#include <httplib.h>
-#include <nlohmann/json.hpp>
-#include <thread>
 #include <chrono>
+#include <cstdio>
 #include <filesystem>
 #include <fstream>
+#include <string>
+#include <thread>
+#include <httplib.h>
+#include <nlohmann/json.hpp>
+#include "test.hpp"
+#include "test_core.hpp"
 
 using json = nlohmann::json;
 
 // Вспомогательная функция: ожидание завершения задачи
-static bool WaitForTask(httplib::Client* cli, int taskId, int maxAttempts = 100) {
+static bool WaitForTask(httplib::Client* cli,
+  int taskId, int maxAttempts = 100) {
   for (int i = 0; i < maxAttempts; ++i) {
     char buf[64];
     snprintf(buf, sizeof(buf), R"({"id":%d})", taskId);
@@ -48,9 +51,9 @@ static void SimpleDoubleTest(httplib::Client* cli) {
       {"velocity", {{"x", 0.0}, {"y", 0.0}, {"z", 0.0}}}
     }},
     {"body1", {
-       {"mass", 1e8},
-       {"position", {{"x", -5.0}, {"y", -2.88675134}, {"z", 0.0}}},
-	   {"velocity", {{"x", 0.0}, {"y", 0.0}, {"z", 0.0}}}
+      {"mass", 1e8},
+      {"position", {{"x", -5.0}, {"y", -2.88675134}, {"z", 0.0}}},
+      {"velocity", {{"x", 0.0}, {"y", 0.0}, {"z", 0.0}}}
     }},
     {"body2", {
       {"mass", 1e8},
@@ -132,7 +135,7 @@ static void RandomInitialConditionsTest(httplib::Client* cli) {
   std::srand(static_cast<unsigned>(std::time(nullptr)));
 
   auto randomDouble = [](double min, double max) {
-    return min + (max - min) * (std::rand() / (double)RAND_MAX);
+    return min + (max - min) * (std::rand() / static_cast<double>(RAND_MAX));
   };
 
   json input = {
@@ -179,7 +182,7 @@ static void RandomInitialConditionsTest(httplib::Client* cli) {
     REQUIRE(result["data"].size() > 0);
 }
 
-//Тест для рисовалки
+//  Тест для рисовалки
 static void PlotTest(httplib::Client* cli) {
   // Земля-Луна-Солнце
   json input = {
@@ -218,7 +221,7 @@ static void PlotTest(httplib::Client* cli) {
   REQUIRE(dataRes);
   json result = json::parse(dataRes->body);
   REQUIRE(result["status"] == "ok");
-	
+
   // Сохраняем данные в файл для построения картинки
   std::filesystem::path dataDir("data");
   if (!std::filesystem::exists(dataDir))
@@ -226,12 +229,13 @@ static void PlotTest(httplib::Client* cli) {
   std::string jsonDataPath = (dataDir / "three_body_result.json").string();
   {
     std::ofstream fout(jsonDataPath);
-    fout << result["data"].dump(); // сохраняем только массив data
+    fout << result["data"].dump();  // сохраняем только массив data
   }
 
   std::filesystem::path pythonDir("python");
   std::string plotterPath = (pythonDir / "plot.py").string();
-  std::string outputImagePath = (dataDir / "three_body_trajectory.png").string();
+  std::string outputImagePath = (dataDir /
+    "three_body_trajectory.png").string();
 
   // Формируем команду: python3 plot.py
   char command[1024];
