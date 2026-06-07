@@ -5,11 +5,11 @@
  * Тесты для задачи трех тел
  */
 
+#include <httplib.h>
 #include <chrono>
 #include <cstdio>
 #include <filesystem>
 #include <fstream>
-#include <httplib.h>
 #include <string>
 #include <thread>
 #include <nlohmann/json.hpp>
