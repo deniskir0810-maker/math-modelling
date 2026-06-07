@@ -4,10 +4,10 @@
 */
 
 #include <string>
+#include <nlohmann/json.hpp>
+#include "abstract_solver_wrapper.hpp"
 #include "methods.hpp"
 #include "three_bodies_problem_solver.hpp"
-#include "abstract_solver_wrapper.hpp"
-#include <nlohmann/json.hpp>
 
 namespace mm {
 
