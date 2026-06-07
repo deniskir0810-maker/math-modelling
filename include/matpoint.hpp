@@ -11,7 +11,7 @@
 #include <cmath>
 #include "vec3d.hpp"
 
-namespace mm{
+namespace mm {
 // Гравитационная постоянная
 const double G = 6.6740e-11;
 /**
@@ -22,7 +22,7 @@ const double G = 6.6740e-11;
 template<typename T>
 
 class mat_point {
-public:
+  public:
   //! Масса
   T mass;
   //! Текущая координата точки
@@ -37,52 +37,53 @@ public:
   }
 
   // Конструкторы
-  mat_point() : point(), velocity(), mass(0), acceleration() {};
-  
+  mat_point() : point(), velocity(), mass(0), acceleration() {}
+
   mat_point(const mat_point& other) {
     point = other.point;
     velocity = other.velocity;
     mass = other.mass;
-	acceleration = other.acceleration;
+    acceleration = other.acceleration;
   }
-  
+
   mat_point(T m, R3Vec<T> a, R3Vec<T> b, R3Vec<T> c) {
     mass = m;
-	point = a;
-	velocity = b;
-	acceleration = c;
+    point = a;
+    velocity = b;
+    acceleration = c;
   }
 
   // Сила притяжения между двумя точками
   R3Vec<T> NewtonForce(const mat_point& other) const {
-	R3Vec<T> res = other.point - this->point;
-	T dist = 1 / (res.length() * res.length() * res.length());
-	return res * this->mass * other.mass * G * dist;
+    R3Vec<T> res = other.point - this->point;
+    T dist = 1 / (res.length() * res.length() * res.length());
+    return res * this->mass * other.mass * G * dist;
   }
   // Операторы
   mat_point& operator+= (const mat_point& other) {
-	point += other.point;
-	velocity += other.velocity;
-	acceleration += other.acceleration;
-	return *this;
+    point += other.point;
+    velocity += other.velocity;
+    acceleration += other.acceleration;
+    return *this;
   }
 
   mat_point operator+ (const mat_point& other) const {
-	return mat_point(mass, point + other.point, velocity + other.velocity, acceleration + other.acceleration);
+    return mat_point(mass, point + other.point, velocity + other.velocity,
+		acceleration + other.acceleration);
   }
 
   mat_point operator* (const T a) const {
-	return mat_point(mass, point * a, velocity * a, acceleration * a);
+    return mat_point(mass, point * a, velocity * a, acceleration * a);
   }
 
   // Копирование с произвольным типом данных
   template<typename U>
   mat_point(const mat_point<U>& other) : mass(static_cast<T>(other.mass)),
     point(other.point),
-	velocity(other.velocity),
+    velocity(other.velocity),
 	acceleration(other.acceleration) {
   }
 };
-}
+}  // namespace mm
 
-#endif //! INCLUDE_MATPOINT_HPP_
+#endif  // INCLUDE_MATPOINT_HPP_
