@@ -55,22 +55,22 @@ public:
   }
 
   // Операторы
-  R3Vec operator + (const R3Vec& other) const {
+  R3Vec operator+ (const R3Vec& other) const {
     return R3Vec(x + other.x, y + other.y, z + other.z);
   }
-  R3Vec& operator += (const R3Vec& other) {
+  R3Vec& operator+= (const R3Vec& other) {
      x += other.x;
      y += other.y;
      z += other.z;
      return *this;
   }
-  R3Vec operator - (const R3Vec& other) const {
+  R3Vec operator- (const R3Vec& other) const {
     return R3Vec(x - other.x, y - other.y, z - other.z);
   }
-  R3Vec operator -() const {
+  R3Vec operator-() const {
     return R3Vec(-x, -y, -z);
   }
-  R3Vec& operator -= (const R3Vec& other) {
+  R3Vec& operator-= (const R3Vec& other) {
     x -= other.x;
     y -= other.y;
     z -= other.z;
