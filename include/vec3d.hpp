@@ -1,5 +1,5 @@
 /**
-* @file include/three_bodies_problem_solver.hpp
+* @file include/vec3d.hpp
 * @author Denis Kirilenko
 * 
 * Класс трехмерного вектора
@@ -11,12 +11,12 @@
 #include <cmath>
 
 namespace mm {
-// Точность (double/float)
+// Тип данных, используемых для арифметики (double/float)
 template<typename T>
     
 class R3Vec {
 private:
-  // Координаты вектора
+  //@param Координаты вектора
   T x, y, z;
 public:
   // Конструкторы
